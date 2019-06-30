@@ -1,0 +1,65 @@
+import { CallBuilder } from './call_builder';
+
+/**
+ * Creates a new {@link TransactionCallBuilder} pointed to server defined by serverUrl.
+ * Do not create this object directly, use {@link Server#transactions}.
+ *
+ * @class TransactionCallBuilder
+ * @extends CallBuilder
+ * @see [All Transactions](https://www.zion.org/developers/equator/reference/endpoints/transactions-all.html)
+ * @constructor
+ * @param {string} serverUrl Equator server URL.
+ */
+export class TransactionCallBuilder extends CallBuilder {
+  constructor(serverUrl) {
+    super(serverUrl);
+    this.url.segment('transactions');
+  }
+
+  /**
+   * The transaction details endpoint provides information on a single transaction. The transaction hash provided in the hash argument specifies which transaction to load.
+   * @see [Transaction Details](https://www.zion.org/developers/equator/reference/endpoints/transactions-single.html)
+   * @param {string} transactionId Transaction ID
+   * @returns {TransactionCallBuilder} current TransactionCallBuilder instance
+   */
+  transaction(transactionId) {
+    this.filter.push(['transactions', transactionId]);
+    return this;
+  }
+
+  /**
+   * This endpoint represents all transactions that affected a given account.
+   * @see [Transactions for Account](https://www.zion.org/developers/equator/reference/endpoints/transactions-for-account.html)
+   * @param {string} accountId For example: `GDGQVOKHW4VEJRU2TETD6DBRKEO5ERCNF353LW5WBFW3JJWQ2BRQ6KDD`
+   * @returns {TransactionCallBuilder} current TransactionCallBuilder instance
+   */
+  forAccount(accountId) {
+    this.filter.push(['accounts', accountId, 'transactions']);
+    return this;
+  }
+
+  /**
+   * This endpoint represents all transactions in a given ledger.
+   * @see [Transactions for Ledger](https://www.zion.org/developers/equator/reference/endpoints/transactions-for-ledger.html)
+   * @param {number|string} sequence Ledger sequence
+   * @returns {TransactionCallBuilder} current TransactionCallBuilder instance
+   */
+  forLedger(sequence) {
+    const ledgerSequence =
+      typeof sequence === 'number' ? sequence.toString() : sequence;
+
+    this.filter.push(['ledgers', ledgerSequence, 'transactions']);
+    return this;
+  }
+
+  /**
+   * Adds a parameter defining whether to include failed transactions. By default only successful transactions are
+   * returned.
+   * @param {bool} value Set to `true` to include failed transactions.
+   * @returns {TransactionCallBuilder} current TransactionCallBuilder instance
+   */
+  includeFailed(value) {
+    this.url.setQuery('include_failed', value.toString());
+    return this;
+  }
+}

@@ -1,0 +1,34 @@
+module.exports = function(config) {
+  config.set({
+    frameworks: ['mocha', 'chai-as-promised', 'chai', 'sinon'],
+    browsers: ['Firefox'],
+
+    files: [
+      'dist/zion-sdk.js',
+      'test/test-helper.js',
+      'test/unit/**/*.js',
+      'test/integration/server_test.js'
+    ],
+
+    preprocessors: {
+      'test/**/*.js': ['webpack']
+    },
+
+    webpack: {
+      module: {
+        loaders: [
+          { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
+          { test: /\.json$/, loader: 'json-loader' }
+        ]
+      }
+    },
+
+    webpackMiddleware: {
+      noInfo: true
+    },
+
+    singleRun: true,
+
+    reporters: ['dots']
+  });
+};
