@@ -13,7 +13,7 @@ export {
   StellarTomlResolver,
   STELLAR_TOML_MAX_SIZE
 } from './zion_toml_resolver';
-export { default as HorizonAxiosClient } from './equator_axios_client';
+export { default as EquatorAxiosClient } from './equator_axios_client';
 
 // expose classes and functions from zion-base
 export * from 'zion-base';

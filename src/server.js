@@ -8,7 +8,7 @@ import { AccountCallBuilder } from './account_call_builder';
 import { AccountResponse } from './account_response';
 import { CallBuilder } from './call_builder';
 import { Config } from './config';
-import HorizonAxiosClient, {
+import EquatorAxiosClient, {
   getCurrentServerTime
 } from './equator_axios_client';
 import { LedgerCallBuilder } from './ledger_call_builder';
@@ -85,7 +85,7 @@ export class Server {
    * (with the shape `{ minTime: 0, maxTime: N }`) that you can set the `timebounds` option to.
    */
   fetchTimebounds(seconds, _isRetry = false) {
-    // HorizonAxiosClient instead of this.ledgers so we can get at them headers
+    // EquatorAxiosClient instead of this.ledgers so we can get at them headers
     const currentTime = getCurrentServerTime(this.serverURL.hostname());
 
     if (currentTime) {
@@ -105,7 +105,7 @@ export class Server {
 
     // otherwise, retry (by calling the root endpoint)
     // toString automatically adds the trailing slash
-    return HorizonAxiosClient.get(URI(this.serverURL).toString()).then(() =>
+    return EquatorAxiosClient.get(URI(this.serverURL).toString()).then(() =>
       this.fetchTimebounds(seconds, true)
     );
   }
@@ -242,7 +242,7 @@ export class Server {
         .toString('base64')
     );
 
-    return HorizonAxiosClient.post(
+    return EquatorAxiosClient.post(
       URI(this.serverURL)
         .segment('transactions')
         .toString(),

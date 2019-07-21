@@ -3,7 +3,7 @@ import URI from 'urijs';
 import URITemplate from 'urijs/src/URITemplate';
 import isNode from 'detect-node';
 
-import HorizonAxiosClient from './equator_axios_client';
+import EquatorAxiosClient from './equator_axios_client';
 import { version } from '../package.json';
 import { NotFoundError, NetworkError, BadRequestError } from './errors';
 
@@ -191,7 +191,7 @@ export class CallBuilder {
 
     // Temp fix for: https://github.com/zioncoin2100/js-zion-sdk/issues/15
     url.setQuery('c', Math.random());
-    return HorizonAxiosClient.get(url.toString())
+    return EquatorAxiosClient.get(url.toString())
       .then((response) => response.data)
       .catch(this._handleNetworkError);
   }

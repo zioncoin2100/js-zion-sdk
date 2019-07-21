@@ -4,7 +4,7 @@ if (typeof window === 'undefined') {
   require('babel-register');
   global.ZionSdk = require('../src/index');
   global.axios = require('axios');
-  global.HorizonAxiosClient = ZionSdk.HorizonAxiosClient;
+  global.EquatorAxiosClient = ZionSdk.EquatorAxiosClient;
   var chaiAsPromised = require('chai-as-promised');
   global.chai = require('chai');
   global.chai.should();
@@ -13,5 +13,5 @@ if (typeof window === 'undefined') {
   global.expect = global.chai.expect;
 } else {
   window.axios = ZionSdk.axios;
-  window.HorizonAxiosClient = ZionSdk.HorizonAxiosClient;
+  window.EquatorAxiosClient = ZionSdk.EquatorAxiosClient;
 }

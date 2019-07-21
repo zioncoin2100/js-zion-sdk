@@ -901,4 +901,4 @@ export namespace Equator {
   }
 }
 
-export const HorizonAxiosClient: AxiosInstance;
+export const EquatorAxiosClient: AxiosInstance;

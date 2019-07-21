@@ -5,7 +5,7 @@ describe('server.js non-transaction tests', function() {
     this.server = new ZionSdk.Server(
       'https://equator-live.zion.org:1337'
     );
-    this.axiosMock = sinon.mock(HorizonAxiosClient);
+    this.axiosMock = sinon.mock(EquatorAxiosClient);
     ZionSdk.Config.setDefault();
     ZionSdk.Network.useTestNetwork();
   });
@@ -48,7 +48,7 @@ describe('server.js non-transaction tests', function() {
       // use MockAdapter instead of this.axiosMock
       // because we don't want to replace the get function
       // we need to use axios's one so interceptors run!!
-      this.axiosMockAdapter = new MockAdapter(HorizonAxiosClient);
+      this.axiosMockAdapter = new MockAdapter(EquatorAxiosClient);
     });
 
     afterEach(function() {

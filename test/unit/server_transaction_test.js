@@ -3,7 +3,7 @@ describe('server.js transaction tests', function() {
     this.server = new ZionSdk.Server(
       'https://equator-live.zion.org:1337'
     );
-    this.axiosMock = sinon.mock(HorizonAxiosClient);
+    this.axiosMock = sinon.mock(EquatorAxiosClient);
     ZionSdk.Config.setDefault();
     ZionSdk.Network.useTestNetwork();
 

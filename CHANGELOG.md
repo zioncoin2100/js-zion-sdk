@@ -25,7 +25,7 @@ A breaking change will get clearly marked in this log.
 
 - Add types for LedgerCallBuilder.ledger.
 - Add types for Server.operationFeeStats.
-- Add types for the HorizonAxiosClient export.
+- Add types for the EquatorAxiosClient export.
 - Move @types/\* from devDependencies to dependencies.
 - Pass and use a stream response type to CallBuilders if it's different from the
   normal call response.

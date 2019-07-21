@@ -17,7 +17,7 @@ export const SERVER_TIME_MAP = {
   */
 };
 
-const HorizonAxiosClient = axios.create({
+const EquatorAxiosClient = axios.create({
   headers: {
     'X-Client-Name': 'js-zion-sdk',
     'X-Client-Version': version
@@ -28,7 +28,7 @@ function _toSeconds(ms) {
   return Math.floor(ms / 1000);
 }
 
-HorizonAxiosClient.interceptors.response.use((response) => {
+EquatorAxiosClient.interceptors.response.use((response) => {
   const hostname = URI(response.config.url).hostname();
   const serverTime = _toSeconds(Date.parse(response.headers.Date));
   const localTimeRecorded = _toSeconds(new Date().getTime());
@@ -44,7 +44,7 @@ HorizonAxiosClient.interceptors.response.use((response) => {
   return response;
 });
 
-export default HorizonAxiosClient;
+export default EquatorAxiosClient;
 
 /**
  * Given a hostname, get the current time of that server (i.e., use the last-

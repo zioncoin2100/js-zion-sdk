@@ -1,6 +1,6 @@
 describe('equator path tests', function() {
   beforeEach(function() {
-    this.axiosMock = sinon.mock(HorizonAxiosClient);
+    this.axiosMock = sinon.mock(EquatorAxiosClient);
     ZionSdk.Config.setDefault();
     ZionSdk.Network.useTestNetwork();
   });
